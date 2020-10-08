@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -133,3 +133,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'craftyze/mediafiles')
 
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'craftyze/staticfiles')
+
+#JAZZMIN
+JAZZMIN_SETTINGS = {
+    'show_ui_builder': True
+}
