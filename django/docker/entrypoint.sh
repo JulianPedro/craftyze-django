@@ -11,6 +11,8 @@ fi
 
 python manage.py migrate --fake-initial
 python manage.py collectstatic --noinput
+#python manage.py makemessages -l en -l pt_BR
+python manage.py compilemessages
 #python manage.py compress --force
 
 exec "$@"
