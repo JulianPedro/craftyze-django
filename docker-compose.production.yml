@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  django:
+    build:
+      args:
+        MODE: production
+    command: gunicorn --bind :8000 --limit-request-line 8190 --workers 5 craftyze.wsgi:application
+    environment:
+      MODE: production
+
+  nginx:
+    container_name: craftyze_nginx
+    build: ./nginx
+    restart: always
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ssl_data:/etc/resty-auto-ssl
+      - staticfiles:/app/craftyze/staticfiles
+      - mediafiles:/app/craftyze/mediafiles
+    environment:
+      ALLOWED_DOMAINS: "craftyze.com"
+      SITES: "craftyze.com=django:8000"
+    depends_on:
+      - django
+
+volumes:
+  ssl_data:
+  staticfiles:
+  mediafiles:

@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  django:
+    container_name: craftyze_django
+    restart: always
+    build:
+      context: ./django
+      args:
+        TIME_ZONE: America/Sao_Paulo
+    volumes:
+      - ./django/:/app/
+      - staticfiles:/app/craftyze/staticfiles
+      - mediafiles:/app/craftyze/mediafiles
+    ports:
+      - 8000:8000
+    env_file:
+      - ./env/main.env
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: craftyze_postgres
+    restart: always
+    image: postgres:11.6-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - ./env/main.env
+
+volumes:
+  postgres_data:
+  staticfiles:
+  mediafiles:
