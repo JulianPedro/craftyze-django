@@ -43,9 +43,14 @@ DEFAULT_APPS = [
 LOCAL_APPS = [
     'craftyze',
     'public',
+    'company',
+    'job',
 ]
 
-EXTERNAL_APPS = []
+EXTERNAL_APPS = [
+    'django_countries',
+    'ckeditor',
+]
 
 INSTALLED_APPS = DEFAULT_APPS + EXTERNAL_APPS + LOCAL_APPS
 
