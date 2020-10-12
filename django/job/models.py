@@ -39,8 +39,16 @@ class Job(models.Model):
 class Category(models.Model):
     """ Category Model """
 
+    class Position(models.TextChoices):
+        FIRST = 'FIRST', _('First'),
+        SECOND = 'SECOND', _('Second')
+        THIRD = 'THIRD', _('Third')
+        FOURTH = 'FOURTH', _('Fourth')
+
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
     name = models.CharField(verbose_name=_('Category'), max_length=240)
+    is_top = models.BooleanField(verbose_name=_('Is top'), default=False)
+    front_position = models.CharField(max_length=6, choices=Position.choices, blank=True, null=True)
     
     class Meta:
         verbose_name = 'Category'
