@@ -1,413 +1,309 @@
+{% extends 'public/base.html' %}
+
 {% load static %}
 {% load i18n %}
 {% load public_extras %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>CRAFTYZE - {% trans "Find jobs online" %}</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href=" {% static 'public/css/open-iconic-bootstrap.min.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/animate.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/owl.carousel.min.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/owl.theme.default.min.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/magnific-popup.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/aos.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/ionicons.min.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/bootstrap-datepicker.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/jquery.timepicker.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/flaticon.css' %} ">
-    <link rel="stylesheet" href=" {% static 'public/css/icomoon.css' %} ">
-		<link rel="stylesheet" href=" {% static 'public/css/style.css' %} ">
-		<link rel="icon" type="image/x-icon" href="{% static 'public/images/origami.ico' %}" />
-  </head>
-  <body>
-
-	  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-	    <div class="container-fluid px-md-4	">
-	      <a class="navbar-brand" href=" {% static 'public/index.html' %} "> <img src={% static 'public/images/origami.svg' %} width="80" height="80">CRAFTYZE</a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-	        <span class="oi oi-menu"></span> Menu
-	      </button>
-
-	      <div class="collapse navbar-collapse" id="ftco-nav">
-	        <ul class="navbar-nav ml-auto">
-	          <li class="nav-item active"><a href=" {% static 'public/index.html' %} " class="nav-link">🏠 Home</a></li>
-	          <li class="nav-item"><a href=" {% static 'public/browsejobs.html' %} " class="nav-link">🔍 Browse Jobs</a></li>
-	          <li class="nav-item"><a href=" {% static 'public/new-post.html' %} " class="nav-link">👔 Post a Job</a></li>
-	        </ul>
-	      </div>
-	    </div>
-	  </nav>
-    <!-- END nav -->
-
-    <div class="hero-wrap img" style="background-image: url( {% static 'public/images/bg_1.jpg' %} );">
-      <div class="overlay"></div>
-      <div class="container">
-      	<div class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">
-	        <div class="col-md-10 d-flex align-items-center ftco-animate">
-	        	<div class="text text-center pt-5 mt-md-5">
-	        		<p class="mb-4">{% trans "Find Job, Employment, and Career Opportunities" %}</p>
-	            <h1 class="mb-5">{% trans "The Eassiest Way to Get Your New Job" %}</h1>
-							<div class="ftco-counter ftco-no-pt ftco-no-pb">
-			        	<div class="row">
-				          <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
-				            <div class="block-18">
-				              <div class="text d-flex">
-				              	<div class="icon mr-2">
-				              		<span class="flaticon-worldwide"></span>
-				              	</div>
-				              	<div class="desc text-left">
-					                <strong class="number" data-number="46">0</strong>
-					                <span>{% trans "Countries" %}</span>
-				                </div>
-				              </div>
-				            </div>
-				          </div>
-				          <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
-				            <div class="block-18 text-center">
-				              <div class="text d-flex">
-				              	<div class="icon mr-2">
-				              		<span class="flaticon-visitor"></span>
-				              	</div>
-				              	<div class="desc text-left">
-					                <strong class="number" data-number="{{ companies.count }}">0</strong>
-					                <span>{% trans "Companies" %}</span>
-					              </div>
-				              </div>
-				            </div>
-				          </div>
-				          <div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
-				            <div class="block-18 text-center">
-				              <div class="text d-flex">
-				              	<div class="icon mr-2">
-				              		<span class="flaticon-resume"></span>
-				              	</div>
-				              	<div class="desc text-left">
-					                <strong class="number" data-number="{{ jobs.count }}">0</strong>
-					                <span>{% trans "Jobs" %}</span>
-					              </div>
-				              </div>
-				            </div>
-				          </div>
-				        </div>
-			        </div>
-							<div class="ftco-search my-md-5">
-								<div class="row">
-				          <div class="col-md-12 tab-wrap">
-				            <div class="tab-content p-4" id="v-pills-tabContent">
-				              <div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-				              	<form action="#" class="search-job">
-				              		<div class="row no-gutters">
-				              			<div class="col-md mr-md-2">
-				              				<div class="form-group">
-					              				<div class="form-field">
-					              					<div class="icon"><span class="icon-briefcase"></span></div>
-									                <input type="text" class="form-control" placeholder="{% trans 'eg. Garphic. Web Developer' %}">
-									              </div>
-								              </div>
-				              			</div>
-				              			<div class="col-md mr-md-2">
-				              				<div class="form-group">
-				              					<div class="form-field">
-					              					<div class="select-wrap">
-							                      <div class="icon"><span class="ion-ios-arrow-down"></span></div>
-							                      <select name="categories" id="category-select" class="form-control">
-																			<option value="">{% trans "All" %}</option>
-																			{% for category in categories %}
-							                      		<option value="{{ category.id }}">{{ category.name }}</option>
-																			{% endfor %}
-							                      </select>
-							                    </div>
-									              </div>
-								              </div>
-				              			</div>
-				              			<div class="col-md mr-md-2">
-				              				<div class="form-group">
-				              					<div class="form-field">
-					              					<div class="icon"><span class="icon-map-marker"></span></div>
-									                <input type="text" class="form-control" placeholder="{% trans 'Location' %}">
-									              </div>
-								              </div>
-				              			</div>
-				              			<div class="col-md">
-				              				<div class="form-group">
-				              					<div class="form-field">
-								                	<button type="submit" class="form-control btn btn-primary">{% trans "Search" %}</button>
-									              </div>
-								              </div>
-				              			</div>
-				              		</div>
-				              	</form>
-				              </div>
-				            </div>
-				          </div>
-				        </div>
-			        </div>
-	          </div>
-	        </div>
-	    	</div>
-      </div>
-    </div>
-
-    <section class="ftco-section ftco-no-pt ftco-no-pb">
-    	<div class="container">
-    		<div class="row">
-    			<div class="col-md-12">
-    				<div class="category-wrap">
-    					<div class="row no-gutters">
-    						<div class="col-md-2">
-    							<div class="top-category text-center no-border-left">
-    								<h3><a href="#">Website &amp; Software</a></h3>
-    								<span class="icon flaticon-contact"></span>
-    								<p><span class="number">{{ categories|count_category_postion:"Software" }}</span> <span>{% trans "Open position" %}</span></p>
-    							</div>
-    						</div>
-    						<div class="col-md-2">
-    							<div class="top-category text-center active">
-    								<h3><a href="#">Education &amp; Training</a></h3>
-    								<span class="icon flaticon-mortarboard"></span>
-    								<p><span class="number">{{ categories|count_category_postion:"Education" }}</span> <span>{% trans "Open position" %}</span></p>
-    							</div>
-    						</div>
-    						<div class="col-md-2">
-    							<div class="top-category text-center">
-    								<h3><a href="#">Graphic &amp; UI/UX Design</a></h3>
-    								<span class="icon flaticon-idea"></span>
-    								<p><span class="number">{{ categories|count_category_postion:"Graphic" }}</span> <span>{% trans "Open position" %}</span></p>
-    							</div>
-    						</div>
-    						<div class="col-md-2">
-    							<div class="top-category text-center">
-    								<h3><a href="#">Accounting &amp; Finance</a></h3>
-    								<span class="icon flaticon-accounting"></span>
-    								<p><span class="number">{{ categories|count_category_postion:"Finance" }}</span> <span>{% trans "Open position" %}</span></p>
-    							</div>
-    						</div>
-    						<div class="col-md-2">
-    							<div class="top-category text-center">
-    								<h3><a href="#">Restaurant &amp; Food</a></h3>
-    								<span class="icon flaticon-dish"></span>
-    								<p><span class="number">{{ categories|count_category_postion:"Restaurant" }}</span> <span>{% trans "Open position" %}</span></p>
-    							</div>
-    						</div>
-    						<div class="col-md-2">
-    							<div class="top-category text-center">
-    								<h3><a href="#">Health &amp; Hospital</a></h3>
-    								<span class="icon flaticon-stethoscope"></span>
-    								<p><span class="number">{{ categories|count_category_postion:"Hospital" }}</span> <span>{% trans "Open position" %}</span></p>
-    							</div>
-    						</div>
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-
-    <section class="ftco-section">
-    	<div class="container">
-    		<div class="row justify-content-center mb-5">
-          <div class="col-md-7 heading-section text-center ftco-animate">
-          	<span class="subheading">{% trans "Job Categories" %}</span>
-            <h2 class="mb-0">{% trans "Top Categories" %} </h2>
-          </div>
-        </div>
-        <div class="row">
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category text-center">
-							{% for item in categories|category_position:"FIRST" %}
-								{% with cat_name=item.name %}
-    							<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
-								{% endwith %}
-							{% endfor %}
-        		</ul>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category text-center">
-							{% for item in categories|category_position:"SECOND" %}
-								{% with cat_name=item.name %}
-    							<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
-								{% endwith %}
-							{% endfor %}
-        		</ul>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category text-center">
-							{% for item in categories|category_position:"THIRD" %}
-								{% with cat_name=item.name %}
-    							<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
-								{% endwith %}
-							{% endfor %}
-        		</ul>
-        	</div>
-        	<div class="col-md-3 ftco-animate">
-        		<ul class="category text-center">
-							{% for item in categories|category_position:"FOURTH" %}
-								{% with cat_name=item.name %}
-    							<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
-								{% endwith %}
-							{% endfor %}
-        		</ul>
-        	</div>
-        </div>
-    	</div>
-    </section>
-
-    <section class="ftco-section services-section">
-      <div class="container">
-        <div class="row d-flex">
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-resume"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">{% trans "Search Millions of Jobs" %}</h3>
-                <p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-team"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">{% trans "Easy To Manage Jobs" %}</h3>
-                <p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-career"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">{% trans "Top Careers" %}</h3>
-                <p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-3 d-flex align-self-stretch ftco-animate">
-            <div class="media block-6 services d-block">
-              <div class="icon"><span class="flaticon-employees"></span></div>
-              <div class="media-body">
-                <h3 class="heading mb-3">{% trans "Search Expert Candidates" %}</h3>
-                <p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-		<section class="ftco-section bg-light">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-9 pr-lg-5">
-						<div class="row justify-content-center pb-3">
-		          <div class="col-md-12 heading-section ftco-animate">
-		          	<span class="subheading">{% trans "Recently Added Jobs" %}</span>
-		            <h2 class="mb-4">{% trans "Featured Jobs Posts For This Week" %}</h2>
-		          </div>
-		        </div>
-						<div class="row">
-							{% for job in jobs|top_jobs %}
-								<div class="col-md-12 ftco-animate">
-									<div class="job-post-item p-4 d-block d-lg-flex align-items-center">
-										<div class="one-third mb-4 mb-md-0">
-											<div class="job-post-item-header align-items-center">
-												<span class="subadge">{{ job.kind }}</span>
-												<h2 class="mr-3 text-black"><a href="#">{{ job.title }}</a></h2>
+{% block navsearch %}
+	<div class="hero-wrap img" style="background-image: url( {% static 'public/images/bg_1.jpg' %} );">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row d-md-flex no-gutters slider-text align-items-center justify-content-center">
+				<div class="col-md-10 d-flex align-items-center ftco-animate">
+					<div class="text text-center pt-5 mt-md-5">
+						<p class="mb-4">{% trans "Find Job, Employment, and Career Opportunities" %}</p>
+						<h1 class="mb-5">{% trans "The Eassiest Way to Get Your New Job" %}</h1>
+						<div class="ftco-counter ftco-no-pt ftco-no-pb">
+							<div class="row">
+								<div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+									<div class="block-18">
+										<div class="text d-flex">
+											<div class="icon mr-2">
+												<span class="flaticon-worldwide"></span>
 											</div>
-											<div class="job-post-item-body d-block d-md-flex">
-												<div class="mr-3"><span class="icon-layers"></span> <a href="#">{{ job.company.name }}</a></div>
-												<div><span class="icon-my_location"></span> <span>{{ job.get_restrict_country_display|default:"Remote" }}</span></div>
+											<div class="desc text-left">
+												<strong class="number" data-number="46">0</strong>
+												<span>{% trans "Countries" %}</span>
 											</div>
-										</div>
-
-										<div class="one-forth ml-auto d-flex align-items-center mt-4 md-md-0">
-											<div>
-												<a href="#" class="icon text-center d-flex justify-content-center align-items-center icon mr-2">
-													<span class="icon-heart"></span>
-												</a>
-											</div>
-											<a href=" {% static 'public/job-single.html' %} " class="btn btn-primary py-2">{% trans "Apply Job" %}</a>
 										</div>
 									</div>
-								</div><!-- end -->
-							{% endfor %}
-		        </div>
-		      </div>
-		      <div class="col-lg-3 sidebar">
-		        <div class="row justify-content-center pb-3">
-		          <div class="col-md-12 heading-section ftco-animate">
-		            <h2 class="mb-4">{% trans "Top Recruitments" %}</h2>
-		          </div>
-		        </div>
-						{% for company in companies|top_companies %}
-							<div class="sidebar-box ftco-animate">
-								<div class="">
-									<a href="#" class="company-wrap"><img src="{{ company.image.url }}" class="img-fluid" alt="{% trans 'Company Logo' %}"></a>
-									<div class="text p-3">
-										<h3><a href="#">{{ company.name }}</a></h3>
-										<p><span class="number">{{ company.jobs.count }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+								<div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+									<div class="block-18 text-center">
+										<div class="text d-flex">
+											<div class="icon mr-2">
+												<span class="flaticon-visitor"></span>
+											</div>
+											<div class="desc text-left">
+												<strong class="number" data-number="{{ companies.count }}">0</strong>
+												<span>{% trans "Companies" %}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-4 d-flex justify-content-center counter-wrap ftco-animate">
+									<div class="block-18 text-center">
+										<div class="text d-flex">
+											<div class="icon mr-2">
+												<span class="flaticon-resume"></span>
+											</div>
+											<div class="desc text-left">
+												<strong class="number" data-number="{{ jobs.count }}">0</strong>
+												<span>{% trans "Jobs" %}</span>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						{% endfor %}
-		      </div>
+						</div>
+						<div class="ftco-search my-md-5">
+							<div class="row">
+								<div class="col-md-12 tab-wrap">
+									<div class="tab-content p-4" id="v-pills-tabContent">
+										<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
+											<form action="#" class="search-job">
+												<div class="row no-gutters">
+													<div class="col-md mr-md-2">
+														<div class="form-group">
+															<div class="form-field">
+																<div class="icon"><span class="icon-briefcase"></span></div>
+																<input type="text" class="form-control" placeholder="{% trans 'eg. Garphic. Web Developer' %}">
+															</div>
+														</div>
+													</div>
+													<div class="col-md mr-md-2">
+														<div class="form-group">
+															<div class="form-field">
+																<div class="select-wrap">
+																	<div class="icon"><span class="ion-ios-arrow-down"></span></div>
+																	<select name="categories" id="category-select" class="form-control">
+																		<option value="">{% trans "All" %}</option>
+																		{% for category in categories %}
+																			<option value="{{ category.id }}">{{ category.name }}</option>
+																		{% endfor %}
+																	</select>
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="col-md mr-md-2">
+														<div class="form-group">
+															<div class="form-field">
+																<div class="icon"><span class="icon-map-marker"></span></div>
+																<input type="text" class="form-control" placeholder="{% trans 'Location' %}">
+															</div>
+														</div>
+													</div>
+													<div class="col-md">
+														<div class="form-group">
+															<div class="form-field">
+																<button type="submit" class="form-control btn btn-primary">{% trans "Search" %}</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>
+		</div>
+	</div>
+{% endblock navsearch %}
 
-		<section class="ftco-section-parallax">
-      <div class="parallax-img d-flex align-items-center">
-        <div class="container">
-          <div class="row d-flex justify-content-center">
-            <div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-              <h2>{% trans "Subcribe to our Newsletter" %}</h2>
-              <p>{% trans "Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in" %}</p>
-              <div class="row d-flex justify-content-center mt-4 mb-4">
-                <div class="col-md-12">
-                  <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input type="text" class="form-control" placeholder="{% trans 'Enter email address' %}">
-                      <input type="submit" value="{% trans 'Subscribe' %}" class="submit px-3">
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+{% block catcard %}
+	<section class="ftco-section ftco-no-pt ftco-no-pb">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="category-wrap">
+						<div class="row no-gutters">
+							<div class="col-md-2">
+								<div class="top-category text-center no-border-left">
+									<h3><a href="#">Website &amp; Software</a></h3>
+									<span class="icon flaticon-contact"></span>
+									<p><span class="number">{{ categories|count_category_postion:"Software" }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="top-category text-center active">
+									<h3><a href="#">Education &amp; Training</a></h3>
+									<span class="icon flaticon-mortarboard"></span>
+									<p><span class="number">{{ categories|count_category_postion:"Education" }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="top-category text-center">
+									<h3><a href="#">Graphic &amp; UI/UX Design</a></h3>
+									<span class="icon flaticon-idea"></span>
+									<p><span class="number">{{ categories|count_category_postion:"Graphic" }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="top-category text-center">
+									<h3><a href="#">Accounting &amp; Finance</a></h3>
+									<span class="icon flaticon-accounting"></span>
+									<p><span class="number">{{ categories|count_category_postion:"Finance" }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="top-category text-center">
+									<h3><a href="#">Restaurant &amp; Food</a></h3>
+									<span class="icon flaticon-dish"></span>
+									<p><span class="number">{{ categories|count_category_postion:"Restaurant" }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+							<div class="col-md-2">
+								<div class="top-category text-center">
+									<h3><a href="#">Health &amp; Hospital</a></h3>
+									<span class="icon flaticon-stethoscope"></span>
+									<p><span class="number">{{ categories|count_category_postion:"Hospital" }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock catcard %}
 
-    <footer class="ftco-footer ftco-bg-dark ftco-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a></p>
-          </div>
-        </div>
-      </div>
-    </footer>
-  <!-- loader -->
-  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+{% block catbest %}
+	<section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center mb-5">
+				<div class="col-md-7 heading-section text-center ftco-animate">
+					<span class="subheading">{% trans "Job Categories" %}</span>
+					<h2 class="mb-0">{% trans "Top Categories" %} </h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3 ftco-animate">
+					<ul class="category text-center">
+						{% for item in categories|category_position:"FIRST" %}
+							{% with cat_name=item.name %}
+								<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
+							{% endwith %}
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-md-3 ftco-animate">
+					<ul class="category text-center">
+						{% for item in categories|category_position:"SECOND" %}
+							{% with cat_name=item.name %}
+								<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
+							{% endwith %}
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-md-3 ftco-animate">
+					<ul class="category text-center">
+						{% for item in categories|category_position:"THIRD" %}
+							{% with cat_name=item.name %}
+								<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
+							{% endwith %}
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-md-3 ftco-animate">
+					<ul class="category text-center">
+						{% for item in categories|category_position:"FOURTH" %}
+							{% with cat_name=item.name %}
+								<li><a href="#">{% trans item.name %} <br><span class="number">{{ categories|count_category_postion:cat_name }}</span> <span>{% trans "Open position" %}</span><i class="ion-ios-arrow-forward"></i></a></li>
+							{% endwith %}
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock catbest %}
 
-  <script src=" {% static 'public/js/jquery.min.js' %} "></script>
-  <script src=" {% static 'public/js/jquery-migrate-3.0.1.min.js' %} "></script>
-  <script src=" {% static 'public/js/popper.min.js' %} "></script>
-  <script src=" {% static 'public/js/bootstrap.min.js' %} "></script>
-  <script src=" {% static 'public/js/jquery.easing.1.3.js' %} "></script>
-  <script src=" {% static 'public/js/jquery.waypoints.min.js' %} "></script>
-  <script src=" {% static 'public/js/jquery.stellar.min.js' %} "></script>
-  <script src=" {% static 'public/js/owl.carousel.min.js' %} "></script>
-  <script src=" {% static 'public/js/jquery.magnific-popup.min.js' %} "></script>
-  <script src=" {% static 'public/js/aos.js' %} "></script>
-  <script src=" {% static 'public/js/jquery.animateNumber.min.js' %} "></script>
-  <script src=" {% static 'public/js/scrollax.min.js' %} "></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-  <script src=" {% static 'public/js/google-map.js' %} "></script>
-  <script src=" {% static 'public/js/main.js' %} "></script>
-  </body>
-</html>
+{% block info %}
+	<section class="ftco-section services-section">
+		<div class="container">
+			<div class="row d-flex">
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block">
+						<div class="icon"><span class="flaticon-resume"></span></div>
+						<div class="media-body">
+							<h3 class="heading mb-3">{% trans "Search Millions of Jobs" %}</h3>
+							<p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block">
+						<div class="icon"><span class="flaticon-team"></span></div>
+						<div class="media-body">
+							<h3 class="heading mb-3">{% trans "Easy To Manage Jobs" %}</h3>
+							<p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block">
+						<div class="icon"><span class="flaticon-career"></span></div>
+						<div class="media-body">
+							<h3 class="heading mb-3">{% trans "Top Careers" %}</h3>
+							<p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 d-flex align-self-stretch ftco-animate">
+					<div class="media block-6 services d-block">
+						<div class="icon"><span class="flaticon-employees"></span></div>
+						<div class="media-body">
+							<h3 class="heading mb-3">{% trans "Search Expert Candidates" %}</h3>
+							<p>{% trans "A small river named Duden flows by their place and supplies." %}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock info %}
+
+{% block jobs %}
+	<section class="ftco-section bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-9 pr-lg-5">
+					<div class="row justify-content-center pb-3">
+						<div class="col-md-12 heading-section ftco-animate">
+							<span class="subheading">{% trans "Recently Added Jobs" %}</span>
+							<h2 class="mb-4">{% trans "Featured Jobs Posts For This Week" %}</h2>
+						</div>
+					</div>
+					<div class="row">
+						{% for job in jobs|top_jobs %}
+							{% include "public/components/job_card.html" with job=job %}
+						{% endfor %}
+					</div>
+				</div>
+				<div class="col-lg-3 sidebar">
+					<div class="row justify-content-center pb-3">
+						<div class="col-md-12 heading-section ftco-animate">
+							<h2 class="mb-4">{% trans "Top Recruitments" %}</h2>
+						</div>
+					</div>
+					{% for company in companies|top_companies %}
+						<div class="sidebar-box ftco-animate">
+							<div class="">
+								<a href="#" class="company-wrap"><img src="{{ company.image.url }}" class="img-fluid" alt="{% trans 'Company Logo' %}"></a>
+								<div class="text p-3">
+									<h3><a href="#">{{ company.name }}</a></h3>
+									<p><span class="number">{{ company.jobs.count }}</span> <span>{% trans "Open position" %}</span></p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock jobs %}

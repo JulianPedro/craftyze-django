@@ -13,11 +13,13 @@ class Job(models.Model):
     class Kind(models.TextChoices):
         FULL_TIME = 'FULLTIME', _('Full-Time'),
         PART_TIME = 'PARTTIME', _('Part-Time')
+        FREE_LANCE = 'FREELANCE', _('Freelance')
+        TEMPORARY = 'TEMPORARY', _('Temporary')
 
     id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True, primary_key=True)
     title = models.CharField(verbose_name=_('Job'), max_length=240)
     identified_at = models.DateTimeField(verbose_name=_('Identified'), auto_now_add=True)
-    kind = models.CharField(max_length=8, choices=Kind.choices, default=Kind.FULL_TIME)
+    kind = models.CharField(max_length=240, choices=Kind.choices, default=Kind.FULL_TIME)
     category = models.ForeignKey('job.Category', verbose_name=_('Category'), on_delete=models.CASCADE,
                                  related_name='jobs')
     company = models.ForeignKey('company.Company', verbose_name=_('Company'), on_delete=models.CASCADE,

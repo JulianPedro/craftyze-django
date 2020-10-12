@@ -28,3 +28,8 @@ def top_jobs(jobs):
 @register.filter
 def top_companies(companies):
     return companies.annotate(total_jobs=Count('jobs')).order_by('-total_jobs')[:4]
+
+
+@register.filter
+def current_page(path):
+    return path.split('/')[-1]

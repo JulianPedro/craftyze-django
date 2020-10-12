@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.views.generic.edit import FormView
 from django.views.generic.list import ListView
 
 from company.models import Company
 from job.models import Job, Category
+from job.forms import PostForm
 
 
 class Home(TemplateView):
@@ -21,3 +23,11 @@ class BrowserJob(ListView):
     model = Job
     paginate_by = 10
     template_name = 'public/browsejobs.html'
+
+    def get_queryset(self):
+        return Job.objects.all()
+
+
+class PostJob(FormView):
+    form_class = PostForm
+    template_name = 'public/new-post.html'
