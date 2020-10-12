@@ -6,6 +6,7 @@ from django.views.generic.list import ListView
 from company.models import Company
 from job.models import Job, Category
 from job.forms import PostForm
+from job.filters import JobFilter
 
 
 class Home(TemplateView):
@@ -25,7 +26,9 @@ class BrowserJob(ListView):
     template_name = 'public/browsejobs.html'
 
     def get_queryset(self):
-        return Job.objects.all()
+        queryset = self.model.objects.all()
+        filtered = JobFilter(self.request.GET, queryset=queryset)
+        return filtered.qs
 
 
 class PostJob(FormView):

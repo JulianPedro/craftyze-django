@@ -7,7 +7,6 @@ register = template.Library()
 
 @register.filter
 def count_category_postion(categories, name):
-    print(name)
     try:
         category = categories.get(name=name)
         return category.jobs.count()

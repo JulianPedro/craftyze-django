@@ -50,6 +50,8 @@ LOCAL_APPS = [
 EXTERNAL_APPS = [
     'django_countries',
     'ckeditor',
+    'google_analytics',
+    'django_filters',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + EXTERNAL_APPS + LOCAL_APPS
@@ -149,7 +151,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'craftyze/mediafiles')
 STATIC_URL = '/staticfiles/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'craftyze/staticfiles')
 
-#JAZZMIN
+# JAZZMIN
 JAZZMIN_SETTINGS = {
     'show_ui_builder': True
+}
+
+# Google Analytics
+GOOGLE_ANALYTICS = {
+    'google_analytics_id': 'UA-103581444-6'
 }
